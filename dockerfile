@@ -1,4 +1,4 @@
-FROM node:24-apline
+FROM node:22-apline
 
 WORKDIR /usr/src/app
 

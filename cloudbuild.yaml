@@ -1,0 +1,28 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+steps:
+  #Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/gym-attendance-cloud-manager/smartgym-cloud-manager:$COMMIT_SHA', '.']
+
+  #Push image to Cloud Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/gym-attendance-cloud-manager/smartgym-cloud-manager:$COMMIT_SHA']
+
+  #Deploy image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'smartgym-cloud-manager'
+      - '--image'
+      - 'gcr.io/gym-attendance-cloud-manager/smartgym-cloud-manager:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
+images:
+  - 'gcr.io/gym-attendance-cloud-manager/smartgym-cloud-manager:$COMMIT_SHA'

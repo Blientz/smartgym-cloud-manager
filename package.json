@@ -1,7 +1,7 @@
 {
-    "name": "qr-code-app",
+    "name": "gym-attendance-cloud-manager",
     "version": "1.0.0",
-    "description": "QR Code App with Data Management",
+    "description": "gym-attendance-cloud-manager",
     "main": "server.js",
     "scripts": {
       "start": "node server.js"

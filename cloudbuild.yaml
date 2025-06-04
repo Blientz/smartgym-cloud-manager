@@ -1,15 +1,15 @@
 options:
   logging: CLOUD_LOGGING_ONLY
 steps:
-  #Build the Docker image
+  #Build 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/gym-attendance-cloud-manager/smartgym-cloud-manager:$COMMIT_SHA', '.']
 
-  #Push image to Cloud Build
+  #Push 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/gym-attendance-cloud-manager/smartgym-cloud-manager:$COMMIT_SHA']
 
-  #Deploy image to Cloud Run
+  #Deploy 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args:
